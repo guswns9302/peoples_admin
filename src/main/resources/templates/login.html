@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />-->
+<meta name="theme-color" content="#0b1727">
+
+<!-- ===============================================-->
+<!--    Document Title-->
+<!-- ===============================================-->
+<title>Peoples Admin Login</title>
+
+<!-- ===============================================-->
+<!--    Favicon And Styles-->
+<!-- ===============================================-->
+<link rel="shortcut icon" type="image/x-icon" th:href="@{/image/favicon.ico}">
+<link rel="stylesheet" th:href="@{/css/theme.min.css}">
+<link rel="stylesheet" th:href="@{/css/login.css}" />
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script th:src="@{/vendor/bootstrap/5.1.0/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/config.js}"></script>
+<script th:src="@{/vendor/jquery/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/login.js}"></script>
+<script th:src="@{/vendor/fontawesome/all.min.css}"></script>
+<script th:src="@{/js/login.js}"></script>
+</head>
+<body>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+        <div class="container" data-layout="container-fluid">
+            <div class="row flex-center min-vh-100 py-6">
+                <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                    <span class="d-flex flex-center mb-4">
+                        <img class="me-2 bi-appliance" alt=""/>
+                    </span>
+                    <div class="card">
+                        <div class="card-body p-4 p-sm-5">
+                            <div class="row flex-between-center mb-2">
+                                <div class="col-auto">
+                                    <h5 chkI18n="로그인"></h5>
+                                </div>
+                            </div>
+                            <form method="post" onsubmit="return false;">
+                            
+                                <div class="mb-3 validate-input" data-validate="UserID is required">
+                                    <input class="form-control check-input" type="text" name="userId" placeholder="" chkI18n="login.idPlaceholder" onfocus="hideValidate(this);"/><span class="alert-input"></span>
+                                </div>
+                                <div class="mb-3 validate-input" data-validate="Password is required">
+                                    <input class="form-control check-input" type="password" name="password" chkI18n="login.pwPlaceholder" placeholder="" onfocus="hideValidate(this);"/><span class="alert-input"></span>
+                                </div>
+                                <div class="row flex-between-center">
+                                    <div class="col-auto">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="rememberMe"/>
+                                            <label class="form-check-label mb-0" for="rememberMe" chkI18n="login.storeInfo">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a class="fs--1" href="/forgot" chkI18n="login.forgot"></a>
+                                    </div>
+                                </div>
+                                <div id="errorMSG">
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-primary d-block w-100 mt-3" onclick="goLogin();" chkI18n="login.loginBtn"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+</body>
+</html>

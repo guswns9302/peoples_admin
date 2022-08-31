@@ -1,0 +1,12 @@
+
+server:
+  port: 8088
+
+spring:
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    '[com.peoples.admin.peoples_amdmin]': debug
+    '[org.springframework]': info
