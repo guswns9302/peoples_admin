@@ -9,14 +9,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    @GetMapping("/")
-    public String index(@AuthenticationPrincipal SecurityUser user) {
-        if (user != null) {
-            return "redirect:/dashboard";
-        } else {
-            return "redirect:/login";
-        }
-    }
+//    @GetMapping("/")
+//    public String index(@AuthenticationPrincipal SecurityUser user) {
+//        if (user != null) {
+//            return "redirect:/dashboard";
+//        } else {
+//            return "redirect:/login";
+//        }
+//    }
 
     @GetMapping("/login")
     public ModelAndView login(@AuthenticationPrincipal SecurityUser user) {

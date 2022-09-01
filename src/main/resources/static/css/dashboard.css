@@ -1,0 +1,12 @@
+@charset "utf-8";
+.check-input-lg[type=checkbox] {
+    margin-top: 0.45em;
+    margin-left: 0.45em;
+    margin-right: 15px;
+    transform: scale(1.5);
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1.5); /* Opera */
+    padding: 10px;
+}

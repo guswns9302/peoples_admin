@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+</head>
+<body>
+<!-- Left Navbar -->
+<nav th:fragment="leftNavbar" class="navbar navbar-light navbar-vertical navbar-expand-xl">
+    <div class="d-flex align-items-center">
+        <div class="toggle-icon-wrapper">
+            <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle">
+                <span class="navbar-toggle-icon"><span class="toggle-line"></span></span>
+            </button>
+        </div>
+        <!--<a sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-brand me-1 me-sm-3" href="/dashboard" data-bs-toggle="tooltip" data-bs-placement="right" title="" >-->
+        <a class="navbar-brand me-1 me-sm-3" href="/dashboard">
+            <div class="d-flex align-items-center" style="padding-top: 0.825rem !important;padding-bottom: 0.825rem !important;">
+                <img class="me-2 bi-peoples" alt=""/>
+                <h4 style="padding-top: 0.5rem">피플즈</h4>
+            </div>
+        </a>
+        <!--<a sec:authorize="hasRole('ROLE_USER')" class="navbar-brand me-1 me-sm-3" href="/dashboard" data-bs-toggle="tooltip" data-bs-placement="right" title="">-->
+        <!--<a class="navbar-brand me-1 me-sm-3" href="/dashboard">
+            <div class="d-flex align-items-center" style="padding-top: 0.825rem !important;padding-bottom: 0.825rem !important;">
+                <img class="me-2 bi-peoples" alt=""/>
+            </div>
+        </a>-->
+    </div>
+    <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+        <div class="navbar-vertical-content scrollbar">
+            <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+                <!-- 관리자 메뉴 -->
+                <!--<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">-->
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend ="${current == '/adminmgmt'} ? 'active' : ''" href="/adminmgmt" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><span class="material-icons">manage_accounts</span></span><span class="nav-link-text ps-2 fs-1 pb-1" >관리자 리스트</span>
+                        </div>
+                    </a>
+                </li>
+                <!-- 관리자 메뉴 끝 -->
+
+                <!-- 사용자 메뉴 -->
+                <li class="nav-item">
+                    <!-- label-->
+                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                        <div class="col-auto navbar-vertical-label">관리자 메뉴</div>
+                        <div class="col ps-0">
+                            <hr class="mb-0 navbar-vertical-divider" />
+                        </div>
+                    </div>
+                    <a class="nav-link" th:classappend ="${current == '/dashboard'} ? 'active' : ''" href="/dashboard" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><span class="material-icons">space_dashboard</span></span><span class="nav-link-text ps-2 fs-1 pb-1">대시보드</span>
+                        </div>
+                    </a>
+                    <a class="nav-link" th:classappend ="${current == '/usermgmt'} ? 'active' : ''" href="/usermgmt" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><span class="material-icons">groups</span></span><span class="nav-link-text ps-2 fs-1 pb-1">회원 관리</span>
+                        </div>
+                    </a>
+                    <a class="nav-link" th:classappend ="${current == '/studymgmt'} ? 'active' : ''" href="/studymgmt" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><span class="material-icons">school</span></span><span class="nav-link-text ps-2 fs-1 pb-1">스터디 관리</span>
+                        </div>
+                    </a>
+                    <a class="nav-link" th:classappend ="${current == '/log'} ? 'active' : ''"href="/log" role="button">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><span class="material-icons">article</span></span><span class="nav-link-text ps-2 fs-1 pb-1">로그</span>
+                        </div>
+                    </a>
+                </li>
+                <!-- 사용자 메뉴 끝-->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End of Left Navbar -->
+
+</body>
+</html>

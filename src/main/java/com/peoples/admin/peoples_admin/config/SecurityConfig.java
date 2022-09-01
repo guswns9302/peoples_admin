@@ -67,7 +67,7 @@ public class SecurityConfig {
         http.authorizeRequests()
                 .antMatchers(SWAGGER_WHITE_LIST).permitAll()
                 .antMatchers(WEB_RESOURCE_LIST).permitAll()
-                .antMatchers("/","/login").permitAll()
+                .antMatchers("/","/login", "/dashboard", "/usermgmt", "/adminmgmt", "/studymgmt", "/log").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .csrf()

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script th:src="@{/vendor/lodash/lodash.min.js}"></script>
+    <script th:src="@{/vendor/echarts/echarts.js}"></script>
+    <script th:src="@{/sheetjs/xlsx.full.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}"/>
+    <script th:src="@{/js/dashboard.js}"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<!-- ===============================================-->
+<!--    Main Content-->
+<!-- ===============================================-->
+<section layout:fragment="content" class="p-0" style="height: calc(100vh - (69px + 65px));">
+    <div class="row h-50 mb-4">
+        <div class="col-xl-8 h-100">
+            <div class="card h-100">
+                <div class="card-header bg-300">
+                    <h5 class="mb-0">DAU & MAU</h5>
+                </div>
+                <div class="card-body h-100" id="chartArea-AU">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 h-100">
+            <div class="card h-100">
+                <div class="card-header bg-300">
+                    <h5 class="mb-0">가입 유형</h5>
+                </div>
+                <div class="card-body h-100" id="chartArea-pie">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row h-50 mb-2">
+        <div class="col-xl-6 h-100">
+            <div class="card h-100">
+                <div class="card-header bg-300">
+                    <h5 class="mb-0">회원</h5>
+                </div>
+                <div class="card-body h-100" id="chartArea-user">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 h-100">
+            <div class="card h-100">
+                <div class="card-header bg-300">
+                    <h5 class="mb-0">스터디</h5>
+                </div>
+                <div class="card-body h-100" id="chartArea-study">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+</body>
+</html>

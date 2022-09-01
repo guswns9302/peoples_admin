@@ -7,14 +7,14 @@
 .alert-validate:hover:before{visibility:visible;opacity:1}
 
 :root, :root.light, :root .light {
-    /*--appliance-bi-img: url( "../image/appliance-light.svg" );*/
+    --peoples-bi-img: url( "../image/peoples_logo.png" );
 }
 
 .dark {
-    /*--appliance-bi-img: url( "../image/appliance-dark.svg" );*/
+    --peoples-bi-img: url( "../image/peoples_logo.png" );
 }
 
-.bi-appliance {
-    /*content: var(--appliance-bi-img);*/
-    width: 245px;
+.bi-peoples {
+    content: var(--peoples-bi-img);
+    width: 60px;
 }
