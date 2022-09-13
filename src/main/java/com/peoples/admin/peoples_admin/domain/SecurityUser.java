@@ -17,24 +17,24 @@ import java.util.Set;
 @EqualsAndHashCode
 public class SecurityUser implements UserDetails {
     @EqualsAndHashCode.Exclude
-    private User user;
+    private Admin admin;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authority= new HashSet<>();
-        authority.add(new SimpleGrantedAuthority(this.user.getRole().toString()));
+        authority.add(new SimpleGrantedAuthority(this.admin.getRole().toString()));
         return authority;
     }
 
     @Override
     public String getPassword() {
-        return this.user.getPassword();
+        return this.admin.getPassword();
     }
 
     @Override
     @EqualsAndHashCode.Include
     public String getUsername() {
-        return this.user.getUserId();
+        return this.admin.getUserId();
     }
 
     @Override
@@ -58,12 +58,12 @@ public class SecurityUser implements UserDetails {
     }
 
     @Builder
-    public SecurityUser(User user) {
-        this.user = user;
+    public SecurityUser(Admin admin) {
+        this.admin = admin;
     }
 
-    public static SecurityUser of(User user) {
-        return SecurityUser.builder().user(user).build();
+    public static SecurityUser of(Admin admin) {
+        return SecurityUser.builder().admin(admin).build();
     }
 
 }

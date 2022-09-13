@@ -1,12 +1,57 @@
+spring:
+  profiles:
+    group:
+      "dev": "dev, common"
+      "prod": "prod ,common, awsMysql"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "common"
+
+  thymeleaf:
+    cache: false
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    database: mysql
+    show-sql: true
 
 server:
   port: 8088
 
+---
 spring:
-  thymeleaf:
-    cache: false
+  config:
+    activate:
+      on-profile: "dev"
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/studya
+    username: root
+    password: root
 
 logging:
   level:
-    '[com.peoples.admin.peoples_amdmin]': debug
+    '[com.peoples.admin.peoples_admin]': debug
     '[org.springframework]': info
+    '[org.springframework.data.elasticsearch.client.WIRE]': TRACE
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+logging:
+  level:
+    root: ERROR
+    '[com.peoples.admin.peoples_amdmin]': INFO
