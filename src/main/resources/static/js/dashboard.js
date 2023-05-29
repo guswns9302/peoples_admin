@@ -1,26 +1,16 @@
 $(document).ready(function() {
     $("#themeControlToggle").change(function(){
         change_theme();
-        drawAUChart();
-        drawPieChart();
-        drawUserChart();
+        getPieData();
+        getUserChartData();
+
         drawStudyChart();
     })
 
-    var range = $("#timepicker").val();
-    if(range == ''){
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = ('0' + (today.getMonth() + 1)).slice(-2);
-        var day = ('0' + today.getDate()).slice(-2);
-        var dateString = year + '-' + month  + '-' + day;
-        $("#timepicker").val(dateString + ' to ' + dateString);
-    }
-
     change_theme();
-    drawAUChart();
-    drawPieChart();
-    drawUserChart();
+    getPieData();
+    getUserChartData();
+
     drawStudyChart();
 
 });
@@ -63,7 +53,20 @@ function change_theme(){
     }
 }
 
-function drawAUChart(){
+function drawAUChart(data){
+    var plusUser = [];
+    for(var i = 0; i < Object.values(data).length; i++){
+        if(i == 0){
+            plusUser.push(Object.values(data)[i]);
+        }
+        else{
+            var cnt = Object.values(data)[i] + plusUser[i-1];
+            plusUser.push(cnt);
+        }
+    }
+
+
+
     $("#chartArea-AU").empty();
     var chartHtml = ``;
     chartHtml += `<div id="chart-au" style="min-height: 100%; min-width: 300px;" data-echart-responsive="true"></div>`;
@@ -94,7 +97,7 @@ function drawAUChart(){
         },
         xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            data: Object.keys(data),
             axisLabel: chart_axis_style,
             boundaryGap: false
         },
@@ -111,13 +114,13 @@ function drawAUChart(){
         },
         series: [
             {
-                data: [12, 23, 42, 58, 52, 60, 64],
+                data: Object.values(data),
                 type: 'line',
                 smooth: true,
                 name: 'DAU'
             },
             {
-                data: [12, 11, 19, 16, 0, 8, 4],
+                data: plusUser,
                 type: 'line',
                 smooth: true,
                 name: 'MAU'
@@ -127,7 +130,20 @@ function drawAUChart(){
     option && auChart.setOption(option);
 }
 
-function drawPieChart(){
+function getPieData(){
+    var option = deepExtend({}, ajaxOptions);
+    option.URL = "/api/v1/type";
+    option.PARAM = {};
+    option.TYPE = "get";
+    option.ASYNC = false;
+    option.CALLBACK = function(response) {
+        drawPieChart(response);
+    }
+    option.ERROR_CALLBACK = function(response) {
+    }
+    ajaxWrapper.callAjax(option);
+}
+function drawPieChart(data){
     $("#chartArea-pie").empty();
     var chartHtml = ``;
     chartHtml += `<div id="chart-pie" style="min-height: 100%; min-width: 300px;" data-echart-responsive="true"></div>`;
@@ -151,9 +167,9 @@ function drawPieChart(){
                 type: 'pie',
                 radius: '70%',
                 data: [
-                    { value: 60, name: 'Kakao' },
-                    { value: 38, name: 'Naver' },
-                    { value: 10, name: 'Email' }
+                    { value: data.kakao, name: 'Kakao' },
+                    { value: data.naver, name: 'Naver' },
+                    { value: data.email, name: 'Email' }
                 ],
                 emphasis: {
                     focus: 'self',
@@ -168,7 +184,33 @@ function drawPieChart(){
     option && pieChart.setOption(option);
 }
 
-function drawUserChart(){
+function getUserChartData(){
+    var option = deepExtend({}, ajaxOptions);
+    option.URL = "/api/v1/users";
+    option.PARAM = {};
+    option.TYPE = "get";
+    option.ASYNC = false;
+    option.CALLBACK = function(response) {
+        drawUserChart(response);
+        drawAUChart(response);
+    }
+    option.ERROR_CALLBACK = function(response) {
+    }
+    ajaxWrapper.callAjax(option);
+}
+function drawUserChart(data){
+
+    var plusUser = [];
+    for(var i = 0; i < Object.values(data).length; i++){
+        if(i == 0){
+            plusUser.push(Object.values(data)[i]);
+        }
+        else{
+            var cnt = Object.values(data)[i] + plusUser[i-1];
+            plusUser.push(cnt);
+        }
+    }
+
     $("#chartArea-user").empty();
     var chartHtml = ``;
     chartHtml += `<div id="chart-user" style="min-height: 100%; min-width: 300px;" data-echart-responsive="true"></div>`;
@@ -199,7 +241,7 @@ function drawUserChart(){
         },
         xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            data: Object.keys(data),
             axisLabel: chart_axis_style,
             boundaryGap: false
         },
@@ -216,13 +258,13 @@ function drawUserChart(){
         },
         series: [
             {
-                data: [12, 23, 42, 58, 52, 60, 64],
+                data: plusUser,
                 type: 'line',
                 smooth: true,
                 name: '누적 회원'
             },
             {
-                data: [17, 13, 62, 18, 23, 42, 62],
+                data: Object.values(data),
                 type: 'line',
                 smooth: true,
                 name: '신규 회원'

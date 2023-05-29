@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -26,4 +27,16 @@ public class AdminController {
     public ResponseEntity<List<AdminResponse>> createAdmin(@RequestBody Map<String,Object> param){
         return ResponseEntity.ok(adminService.createAdmin(param));
     }
+
+    @GetMapping("/type")
+    public ResponseEntity<Map<String, Object>> getSignUpType(){
+        return ResponseEntity.ok(adminService.getType());
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<Map<LocalDate, Object>> getUsers(){
+        return ResponseEntity.ok(adminService.getUsers());
+    }
+
+
 }
